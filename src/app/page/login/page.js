@@ -1,8 +1,11 @@
-"use client";
-export default function Login() {
+'use client'
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+export default function OfficerProfile() {
+    const [officers, setOfficers] = useState([]);
+
     return (
-        <>
-        Login
-        </>
-    )   
+       <div></div>
+    );
 }
