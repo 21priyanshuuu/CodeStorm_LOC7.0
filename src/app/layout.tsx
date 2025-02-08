@@ -1,13 +1,17 @@
-
+"use client";
 // import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { ConvexProvider, ConvexReactClient } from "convex/react";
+import { KindeProvider } from "@kinde-oss/kinde-auth-nextjs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
+
+const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -30,8 +34,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+
         <Navbar/>
-        {children}
+        <KindeProvider>
+          <ConvexProvider client={convex}>
+            {children}
+          </ConvexProvider>
+        </KindeProvider>
       </body>
     </html>
   );
