@@ -1,8 +1,11 @@
 "use client"; // Mark this file as a client component
 import { UploadButton } from "../../../../utils/uploadthing";
 import React, { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const ComplaintForm = () => {
+  const { toast } = useToast();
+
   const [imageurl1, setimageurl1] = useState("");
   const [complaintType, setComplaintType] = useState("");
   const [name, setName] = useState("");
@@ -53,9 +56,12 @@ const ComplaintForm = () => {
       const result = await response.json();
 
       if (response.ok) {
-        setConfirmationMessage(
-          `Your complaint has been received. Reference No: ${refNo}. A confirmation message has been sent to your provided contact.`
-        );
+        if (response.ok) {
+          toast({
+            title: "Complaint Submitted Successfully",
+            description: `Reference No: ${refNo}. A confirmation message has been sent to your provided contact.`,
+          });
+        }
 
         // Reset form after successful submission
         setComplaintType("");

@@ -13,6 +13,7 @@ const FileComplaintSchema = new mongoose.Schema({
   incidentDate: { type: Date, required: true },
   incidentTime: { type: String, required: true },
   uploadedFiles: { type: String, required: true },
+  userId: { type: String, required: true },
   idProof: { type: String },
   idType: {
     type: String,

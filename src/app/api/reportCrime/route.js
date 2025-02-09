@@ -48,3 +48,27 @@ export async function POST(req) {
     );
   }
 }
+
+
+
+
+
+
+export async function GET(req) {
+  try {
+    await dbConnect(); // Ensure DB connection is established
+
+    console.log("Fetching crime cases...");
+
+    const crimeCases = await ReportCrime.find({}); // Use .find({}) instead of .findAll()
+
+    if (!crimeCases || crimeCases.length === 0) {
+      return NextResponse.json({ error: "No cases found" }, { status: 404 });
+    }
+
+    return NextResponse.json(crimeCases, { status: 200 });
+  } catch (error) {
+    console.error("Error fetching case details:", error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}

@@ -6,7 +6,7 @@ const ProfileSchema = new mongoose.Schema({
   sex: { type: String, required: true, enum: ["Male", "Female", "Other"] },
   department: { type: String, required: true },
   designation: { type: String, required: true },
-  judicial_section: { type: String, required: true },
+  jurisdiction: { type: String, required: true },
   blood_group: {
     type: String,
     required: true,

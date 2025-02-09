@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { resolve } from "path";
 
 const ProfileForm = () => {
   const { user } = useKindeBrowserClient();
@@ -15,10 +16,10 @@ const ProfileForm = () => {
     sex: "",
     department: "",
     designation: "",
-    judicial_section: "",
+    jurisdiction: "",
     blood_group: "",
     dob: "",
-    nearby_police_station: "",
+    police_station: "",
   });
 
   useEffect(() => {
@@ -40,6 +41,7 @@ const ProfileForm = () => {
               const response = await axios.get(`/api/maps?lat=${latitude}&lng=${longitude}`);
               if (response.status === 200) {
                 setPoliceStations(response.data);
+                console.log(response)
               }
             } catch (error) {
               setErrorStations("Failed to fetch police stations.");
@@ -166,6 +168,48 @@ const ProfileForm = () => {
             />
           </div>
           <div>
+            <label className="block text-gray-700">Designation:</label>
+            <input
+              type="text"
+              name="designation"
+              value={formData.designation}
+              onChange={handleChange}
+              className="w-full p-2 border rounded-lg mt-2"
+              placeholder="Enter your designation"
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700">Jurisdiction:</label>
+            <input
+              type="text"
+              name="jurisdiction"
+              value={formData.jurisdiction}
+              onChange={handleChange}
+              className="w-full p-2 border rounded-lg mt-2"
+              placeholder="Enter your jurisdiction"
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700">Blood Group:</label>
+            <select
+              name="blood_group"
+              value={formData.blood_group}
+              onChange={handleChange}
+              className="w-full p-2 border rounded-lg mt-2"
+            >
+              <option value="">Select your blood group</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
+          </div>
+
+          <div>
             <label className="block text-gray-700">Nearby Police Station:</label>
             {loadingStations ? (
               <p className="text-gray-500">Loading police stations...</p>
@@ -173,8 +217,8 @@ const ProfileForm = () => {
               <p className="text-red-500">{errorStations}</p>
             ) : (
               <select
-                name="nearby_police_station"
-                value={formData.nearby_police_station}
+                name="police_station"
+                value={formData.police_station}
                 onChange={handleChange}
                 className="w-full p-2 border rounded-lg mt-2"
               >

@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 import { KindeProvider } from "@kinde-oss/kinde-auth-nextjs";
+import { Toaster } from "../components/ui/toaster"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,8 @@ export default function RootLayout({
       >
 
         <Navbar/>
+        <Toaster />
+
         <KindeProvider>
           <ConvexProvider client={convex}>
             {children}
