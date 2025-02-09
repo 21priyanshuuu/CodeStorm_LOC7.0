@@ -15,14 +15,14 @@ const Navbar = () => {
     <nav className="bg-gray-900 max-h-20xl text-white px-6 py-4 shadow-md">
       <div className="max-w-8xl mx-auto flex justify-between items-center">
         {/* Logo and App Name */}
-        <Link href="/" className="flex items-center space-x-2">
+        <Link href="/page/home" className="flex items-center space-x-2">
           <Image src="/logo.png" alt="SmartShield Logo" width={50} height={40} />
           <span className="text-xl font-bold tracking-wide">SmartShield</span>
         </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6">
-          <Link href="/page/about" className="hover:text-gray-400">About Us</Link>
+          <Link href="/page/home" className="hover:text-gray-400">Home</Link>
           <Link href="/page/filecase" className="hover:text-gray-400">File a Case</Link>
           <Link href="/page/trackcase" className="hover:text-gray-400">Track a Case</Link>
           <Link href="/chat" className="hover:text-gray-400">Chats</Link>

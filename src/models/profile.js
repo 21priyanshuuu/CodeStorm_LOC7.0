@@ -16,6 +16,7 @@ const ProfileSchema = new mongoose.Schema({
   login_name: { type: String, required: true },
   login_email: { type: String, required: true },
   officer_id: { type: String, required: true },
+  police_station:{type:String,required:true}
 });
 
 export default mongoose.models.Profile || mongoose.model("Profile", ProfileSchema);
