@@ -1,8 +1,9 @@
 "use client";
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const CaseDetails = () => {
+const CaseDetailsContent = () => {
   const searchParams = useSearchParams();
   const caseId = searchParams.get("caseId");
   const [caseData, setCaseData] = useState(null);
@@ -27,6 +28,7 @@ const CaseDetails = () => {
           setError(data.message || "Failed to fetch case details.");
         }
       } catch (err) {
+        console.log(err)
         setError("Error fetching case details.");
       } finally {
         setLoading(false);
@@ -57,6 +59,14 @@ const CaseDetails = () => {
         <p>No case details found.</p>
       )}
     </div>
+  );
+};
+
+const CaseDetails = () => {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <CaseDetailsContent />
+    </Suspense>
   );
 };
 

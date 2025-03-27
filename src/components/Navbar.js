@@ -7,8 +7,8 @@ import { Menu, X } from "lucide-react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 const Navbar = () => {
-  const { user, getUser } = useKindeBrowserClient();
-  const alsoUser = getUser();
+  const { user } = useKindeBrowserClient();
+  // const alsoUser = getUser();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -23,6 +23,9 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6">
           <Link href="/page/home" className="hover:text-gray-400">Home</Link>
+          <Link href="/page/QuickCrime" className="hover:text-gray-400">Emergency</Link>
+          <Link href="/page/PublicReporting" className="hover:text-gray-400">Public Reporting</Link>
+
           <Link href="/page/filecase" className="hover:text-gray-400">File a Case</Link>
           <Link href="/page/trackcase" className="hover:text-gray-400">Track a Case</Link>
           <Link href="/chat" className="hover:text-gray-400">Chats</Link>

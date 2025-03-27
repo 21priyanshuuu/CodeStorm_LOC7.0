@@ -1,13 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 const TrackCasePage = () => {
   const [cases, setCases] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedCase, setSelectedCase] = useState(null);
-  const router = useRouter();
 
   useEffect(() => {
     const fetchCases = async () => {
@@ -71,7 +69,7 @@ const TrackCasePage = () => {
                   <img
                     src={selectedCase.idProof}
                     alt="ID Proof"
-                    className="w-full h-40 object-cover border rounded-lg"
+                    className="w-100 h-100 object-cover border rounded-lg"
                   />
                 </div>
               )}
@@ -81,7 +79,7 @@ const TrackCasePage = () => {
                   <img
                     src={selectedCase.uploadedFiles}
                     alt="Uploaded File"
-                    className="w-full h-40 object-cover border rounded-lg"
+                    className="w-80 h-80 object-cover border rounded-lg"
                   />
                 </div>
               )}

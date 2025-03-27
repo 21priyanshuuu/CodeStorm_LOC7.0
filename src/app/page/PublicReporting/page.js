@@ -21,12 +21,12 @@ const ReportCrimeForm = () => {
   };
 
   // Handle file input
-  const handleFileChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      file: e.target.files[0],
-    }));
-  };
+  // const handleFileChange = (e) => {
+  //   setFormData((prevState) => ({
+  //     ...prevState,
+  //     file: e.target.files[0],
+  //   }));
+  // };
 
   // Get user's live location
   const fetchLocation = () => {

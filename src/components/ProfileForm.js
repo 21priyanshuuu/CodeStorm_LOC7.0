@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import { resolve } from "path";
 
 const ProfileForm = () => {
   const { user } = useKindeBrowserClient();
@@ -44,12 +43,14 @@ const ProfileForm = () => {
                 console.log(response)
               }
             } catch (error) {
+              console.log(error);
               setErrorStations("Failed to fetch police stations.");
             } finally {
               setLoadingStations(false);
             }
           },
           (error) => {
+            console.log(error);
             setErrorStations("Location access denied.");
             setLoadingStations(false);
           }
@@ -84,9 +85,10 @@ const ProfileForm = () => {
     };
 
     try {
-      const response = await axios.post("/api/profile", payload);
+      await axios.post("/api/profile", payload);
       alert("Profile saved successfully!");
     } catch (error) {
+      console.error("Error saving profile:", error);
       alert("Failed to save profile. Please try again.");
     }
   };

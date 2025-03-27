@@ -3,7 +3,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import dbConnect from "../../../lib/dbConnect";
 import FileCase from "../../../models/FileCase";
 
-export async function GET(req) {
+export async function GET() {
   try {
     await dbConnect();
 

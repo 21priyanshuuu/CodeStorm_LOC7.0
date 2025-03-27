@@ -16,8 +16,6 @@ const ComplaintForm = () => {
   const [incidentTime, setIncidentTime] = useState("");
   const [idProof, setIdProof] = useState("");
   const [idType, setIdType] = useState("");
-  const [referenceNo, setReferenceNo] = useState("");
-  const [confirmationMessage, setConfirmationMessage] = useState("");
   const [fileType, setFileType] = useState("");
 
   const handleSubmit = async (e) => {
@@ -25,7 +23,7 @@ const ComplaintForm = () => {
 
     // Generate a unique reference number
     const refNo = Math.floor(Math.random() * 1000000).toString();
-    setReferenceNo(refNo);
+    // setReferenceNo(refNo);
 
     // Prepare form data
     const complaintData = {

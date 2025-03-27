@@ -1,7 +1,5 @@
 "use client";
 
-import { UploadButton } from "../../../utils/uploadthing";
-
 export default function Home() {
   const handleSubmit = async () => {
     try {

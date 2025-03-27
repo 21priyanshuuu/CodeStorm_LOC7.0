@@ -14,9 +14,11 @@ export default function PoliceStations() {
                 (position) => {
                     const { latitude, longitude } = position.coords;
                     setLocation({ latitude, longitude });
+                    console.log(location);
                     fetchPoliceStations(latitude, longitude);
                 },
                 (error) => {
+                    console.error("Error fetching location:", error);
                     setError("Error getting location. Please allow location access.");
                     setLoading(false);
                 }
@@ -37,6 +39,7 @@ export default function PoliceStations() {
                 setError(data.error);
             }
         } catch (err) {
+            console.log(err)
             setError("Failed to fetch police stations.");
         } finally {
             setLoading(false);

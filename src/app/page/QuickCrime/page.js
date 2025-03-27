@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-
+import MapComponent from "../../../components/Maps"
 const CaseDetailsPage = () => {
   const [cases, setCases] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,7 +9,7 @@ const CaseDetailsPage = () => {
   useEffect(() => {
     const fetchCases = async () => {
       try {
-        const response = await fetch("/api/reportCrime"); // Ensure correct API route
+        const response = await fetch("/api/reportCrime");
         const data = await response.json();
         console.log(data);
         if (response.ok) {
@@ -27,6 +27,33 @@ const CaseDetailsPage = () => {
     fetchCases();
   }, []);
 
+  const handleOnTheWay = async (caseId) => {
+    try {
+      const response = await fetch(`/api/updateCaseStatus/${caseId}`, { // New API route
+        method: 'PUT', // Or POST, depending on your API
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'On the way' }), // Send the updated status
+      });
+
+      if (response.ok) {
+        // Update the case status in the UI
+        setCases(cases.map(caseItem =>
+          caseItem.case_id === caseId ? { ...caseItem, status: 'On the way' } : caseItem
+        ));
+        alert("Case status updated to 'On the way'"); // Or a better notification
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to update case status");
+      }
+    } catch (err) {
+      console.error("Error updating case status:", err);
+      alert("Error updating case status. Please try again."); // User-friendly error message
+    }
+  };
+
+
   return (
     <div className="max-w-6xl mx-auto p-6">
       <h2 className="text-3xl font-semibold text-center mb-6">Case Details</h2>
@@ -41,7 +68,7 @@ const CaseDetailsPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cases.map((caseItem) => (
             <div
-              key={caseItem.case_id} // Use `case_id` as the unique key
+              key={caseItem.case_id}
               className="bg-white p-4 shadow-md rounded-lg"
             >
               <h3 className="text-xl font-semibold">Case ID: {caseItem.case_id}</h3>
@@ -61,7 +88,6 @@ const CaseDetailsPage = () => {
                 <strong>Phone:</strong> {caseItem.phone_number}
               </p>
 
-              {/* Display Image if Available */}
               {caseItem.image_url && (
                 <div className="mt-3">
                   <p className="font-medium">Uploaded Image:</p>
@@ -72,11 +98,22 @@ const CaseDetailsPage = () => {
                   />
                 </div>
               )}
+                {/* Conditionally render the button */}
+                {caseItem.status !== 'On the way' && ( // Only show if not already "On the way"
+                  <button
+                    onClick={() => handleOnTheWay(caseItem.case_id)}
+                    className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    On the Way
+                  </button>
+                )}
             </div>
           ))}
+          <MapComponent />
         </div>
       )}
     </div>
+
   );
 };
 

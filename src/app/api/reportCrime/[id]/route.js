@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import dbConnect from "../../../lib/dbConnect";
-import ReportCrime from "../../../models/ReportCrime";
+import dbConnect from "../../../../lib/dbConnect";
+import ReportCrime from "../../../../models/ReportCrime";
 
 export async function GET(req, { params }) {
   try {
@@ -13,6 +13,7 @@ export async function GET(req, { params }) {
 
     return NextResponse.json(crimeCase, { status: 200 });
   } catch (error) {
+    console.log(error)
     return NextResponse.json({ error: "Error fetching case details" }, { status: 500 });
   }
 }
