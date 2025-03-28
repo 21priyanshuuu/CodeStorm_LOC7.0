@@ -9,7 +9,7 @@ export default async function Home() {
   const { isAuthenticated } = getKindeServerSession()
 
   if (!(await isAuthenticated())) {
-    return redirect("/api/auth/login?post_login_redirect_url=http://localhost:3000/page/home")
+    return redirect("/api/auth/login?post_login_redirect_url=https://sampank.vercel.app//page/home")
   }
 
   return (
